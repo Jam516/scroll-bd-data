@@ -21,9 +21,11 @@ st.set_page_config(layout="wide", page_title="Active Wallets", page_icon="👤")
 
 st.title("Active Wallets")
 
-df = execute_sql('''
+raw_data = execute_sql('''
 SELECT * FROM SCROLLSTATS_BD_ACTIVE_WALLETS
-''').to_pandas()
+''')
+
+df = pd.DataFrame(raw_data)
 
 @st.cache_data
 def convert_df(df):
