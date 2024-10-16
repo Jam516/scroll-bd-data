@@ -18,12 +18,12 @@ st.title('Scroll BD Data')
 
 st.markdown(
     """
-    This app allows you to download, view and edit data in the Scroll BD database.
+    This app allows you to download, view and edit data from the Scroll BD database.
     - ACTIVE WALLETS: Download historical active wallet data for Scroll projects.
     - TVL: Download historical TVL data for Scroll projects.
     - TRANSACTIONS: Download historical transaction quantity data for Scroll projects.
     - PROJECT LABELS: View and edit project - contract labels.
     
-    **👈 Select a table from the sidebar**
+    **👈 Select a page from the sidebar**
 """
 )
