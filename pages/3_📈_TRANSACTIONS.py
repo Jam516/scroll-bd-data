@@ -51,10 +51,10 @@ csv = convert_df(pivoted_df)
 
 st.title("Transactions")
 
-st.markdown("**Click DOWNLOAD to get transaction data in CSV format**")
+st.markdown("**Click DOWNLOAD to get transaction quantity data in CSV format**")
 st.download_button(
     label="DOWNLOAD",
     data=csv,
-    file_name="scroll_bd_tvl.csv",
+    file_name="scroll_bd_transactions.csv",
     mime="text/csv",
 )
