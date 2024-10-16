@@ -40,7 +40,7 @@ SELECT * FROM SCROLLSTATS.DBT_SCROLLSTATS.SCROLL_BD_TVL
 
 df = pd.DataFrame(raw_data)
 df['MONTH'] = pd.to_datetime(df['MONTH'], format='%Y-%m-%d')
-pivoted_df = df.pivot(index='NAME', columns='MONTH', values='ACTIVE_WALLETS')
+pivoted_df = df.pivot(index='NAME', columns='MONTH', values='TVL')
 pivoted_df = pivoted_df.reset_index()
 pivoted_df.columns = ['NAME'] + [d.strftime('%b %Y') for d in pivoted_df.columns[1:]]
 csv = convert_df(pivoted_df)
