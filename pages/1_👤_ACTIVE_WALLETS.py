@@ -6,6 +6,8 @@ import streamlit as st
 import snowflake.connector
 from snowflake.connector import DictCursor
 
+st.set_page_config(layout="wide", page_title="Active Wallets", page_icon="👤")
+
 ################################
 # Helper Functions
 ################################
@@ -46,8 +48,6 @@ csv = convert_df(pivoted_df)
 ################################
 # Frontend
 ################################
-
-st.set_page_config(layout="wide", page_title="Active Wallets", page_icon="👤")
 
 st.title("Active Wallets")
 
