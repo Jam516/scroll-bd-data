@@ -35,7 +35,7 @@ def convert_df(df):
 ################################
 
 raw_data = execute_sql('''
-SELECT * FROM SCROLLSTATS.DBT_SCROLLSTATS.SCROLL_BD_TVL
+SELECT MONTH, NAME, ROUND(TVL) AS TVL FROM SCROLLSTATS.DBT_SCROLLSTATS.SCROLL_BD_TVL
 ''')
 
 df = pd.DataFrame(raw_data)
