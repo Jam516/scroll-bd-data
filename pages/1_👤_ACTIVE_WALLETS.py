@@ -26,13 +26,17 @@ SELECT * FROM SCROLLSTATS_BD_ACTIVE_WALLETS
 ''')
 
 df = pd.DataFrame(raw_data)
+df['MONTH'] = pd.to_datetime(df['MONTH'], format='%d/%m/%Y')
+pivoted_df = df.pivot(index='NAME', columns='MONTH', values='ACTIVE_WALLETS')
+pivoted_df = pivoted_df.reset_index()
+pivoted_df.columns = ['NAME'] + [d.strftime('%b %Y') for d in pivoted_df.columns[1:]]
 
 @st.cache_data
 def convert_df(df):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
     return df.to_csv().encode("utf-8")
 
-csv = convert_df(df)
+csv = convert_df(pivoted_df)
 
 st.markdown("**Click DOWNLOAD to get active wallet data in CSV format**")
 st.download_button(
