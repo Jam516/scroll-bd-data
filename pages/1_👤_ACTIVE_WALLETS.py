@@ -1,17 +1,29 @@
 import pandas as pd
-import json
 import streamlit as st
-import time
+import snowflake.connector
+from snowflake.connector import DictCursor
+
+def execute_sql(sql_string, **kwargs):
+  conn = snowflake.connector.connect(user=st.secrets["user"],
+                                     password=st.secrets["password"],
+                                     account=st.secrets["account"],
+                                     warehouse=st.secrets["warehouse"],
+                                     database=st.secrets["database"],
+                                     schema=st.secrets["schema"])
+
+  sql = sql_string.format(**kwargs)
+  res = conn.cursor(DictCursor).execute(sql)
+  results = res.fetchall()
+  conn.close()
+  return results
 
 st.set_page_config(layout="wide", page_title="Active Wallets", page_icon="👤")
 
-conn = st.connection("snowflake")
-
 st.title("Active Wallets")
 
-session = conn.session()
-
-df = session.table("SCROLLSTATS_BD_ACTIVE_WALLETS").to_pandas()
+df = execute_sql('''
+SELECT * FROM SCROLLSTATS_BD_ACTIVE_WALLETS
+''').to_pandas()
 
 @st.cache_data
 def convert_df(df):
